@@ -14,7 +14,7 @@ globalCloudBeesPipelineTemplateCatalog:
     scm:
       github:
         configuredByUrl: true
-        credentialsId: "cloudbees-ci-workshop-github-app"
+        credentialsId: "cloudbees-ci-workshop-github-app-pem"
         id: "workshop-catalog"
         repoOwner: "${GITHUB_ORGANIZATION}"
         repository: "pipeline-template-catalog"
@@ -42,7 +42,7 @@ unclassified:
     apiRateLimitChecker: ThrottleForNormalize
   gitHubPluginConfig:
     hookSecretConfigs:
-    - credentialsId: "cloudbees-ci-workshop-github-webhook-secret"
+    - credentialsId: "cbci-workshop-gh-app-webhook-secret"
   globalDefaultFlowDurabilityLevel:
     durabilityHint: PERFORMANCE_OPTIMIZED
   globallibraries:
@@ -53,7 +53,7 @@ unclassified:
         modernSCM:
           scm:
             github:
-              credentialsId: "cloudbees-ci-workshop-github-app"
+              credentialsId: "cloudbees-ci-workshop-github-app-pem"
               repoOwner: "${GITHUB_ORGANIZATION}"
               repository: "pipeline-library"
   headerLabel:
@@ -94,22 +94,17 @@ credentials:
     domainCredentials:
     - credentials:
       - string:
-          description: "CasC Update Secret"
-          id: "casc-update-secret"
-          scope: GLOBAL
-          secret: "${cbciCascWorkshopControllerProvisionSecret}"
-      - string:
           description: "Webhook secret for CloudBees CI Workshop GitHub App"
-          id: "cloudbees-ci-workshop-github-webhook-secret"
+          id: "cbci-workshop-gh-app-webhook-secret"
           scope: SYSTEM
-          secret: "${gitHubWebhookSecret}"
+          secret: "${cbci-workshop-gh-app-webhook-secret}"
       - gitHubApp:
           apiUri: "https://api.github.com"
           appID: "${GITHUB_APP_ID}"
           description: "CloudBees CI Workshop GitHub App credential"
-          id: "cloudbees-ci-workshop-github-app"
+          id: "cloudbees-ci-workshop-github-app-pem"
           owner: "${GITHUB_ORGANIZATION}"
-          privateKey: "${gitHubAppPrivateKey}"
+          privateKey: "${cbci-workshop-github-app-pem}"
       - usernamePassword:
           password: "${userApiToken}"
           description: description:api-token
