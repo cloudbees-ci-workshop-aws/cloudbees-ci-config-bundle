@@ -7,14 +7,14 @@ jenkins:
       - key: "GITHUB_APP"
         value: "${GITHUB_APP}"
   quietPeriod: 0
-  systemMessage: 'Jenkins configured using CloudBees CI CasC - v2'
+  systemMessage: 'This instance has been configured using CloudBees CI CasC - v2'
 globalCloudBeesPipelineTemplateCatalog:
   catalogs:
   - branchOrTag: "main"
     scm:
       github:
         configuredByUrl: true
-        credentialsId: "cloudbees-ci-workshop-github-app-pem"
+        credentialsId: "cbci-workshop-github-app-pem"
         id: "workshop-catalog"
         repoOwner: "${GITHUB_ORGANIZATION}"
         repository: "pipeline-template-catalog"
@@ -53,7 +53,7 @@ unclassified:
         modernSCM:
           scm:
             github:
-              credentialsId: "cloudbees-ci-workshop-github-app-pem"
+              credentialsId: "cbci-workshop-github-app-pem"
               repoOwner: "${GITHUB_ORGANIZATION}"
               repository: "pipeline-library"
   headerLabel:
@@ -102,7 +102,7 @@ credentials:
           apiUri: "https://api.github.com"
           appID: "${GITHUB_APP_ID}"
           description: "CloudBees CI Workshop GitHub App credential"
-          id: "cloudbees-ci-workshop-github-app-pem"
+          id: "cbci-workshop-github-app-pem"
           owner: "${GITHUB_ORGANIZATION}"
           privateKey: "${cbci-workshop-github-app-pem}"
       - usernamePassword:
