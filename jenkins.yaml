@@ -1,0 +1,68 @@
+jenkins:
+  authorizationStrategy: "cloudBeesRoleBasedAccessControl"
+  quietPeriod: 0
+  systemMessage: 'Jenkins configured using CloudBees CI CasC - v1'
+globalCloudBeesPipelineTemplateCatalog:
+  catalogs:
+  - branchOrTag: "main"
+    scm:
+      github:
+        configuredByUrl: true
+        credentialsId: "cloudbees-ci-workshop-github-app"
+        repoOwner: "REPLACE_GITHUB_ORG"
+        repository: "pipeline-template-catalog"
+        repositoryUrl: "https://github.com/REPLACE_GITHUB_ORG/pipeline-template-catalog.git"
+        traits:
+        - gitHubBranchDiscovery:
+            strategyId: 1
+        - gitHubPullRequestDiscovery:
+            strategyId: 1
+        - gitHubForkDiscovery:
+            strategyId: 1
+            trust: "gitHubTrustPermissions"
+    updateInterval: "1d"
+unclassified:
+  hibernationConfiguration:
+    activities:
+    - "build"
+    - "web"
+    enabled: true
+    gracePeriod: 1500
+  gitHubConfiguration:
+    apiRateLimitChecker: ThrottleForNormalize
+  gitHubPluginConfig:
+    hookSecretConfigs:
+    - credentialsId: "cloudbees-ci-workshop-github-webhook-secret"
+  globalDefaultFlowDurabilityLevel:
+    durabilityHint: PERFORMANCE_OPTIMIZED
+  globallibraries:
+    libraries:
+    - defaultVersion: "main"
+      name: "pipeline-library"
+      retriever:
+        modernSCM:
+          scm:
+            github:
+              credentialsId: "cloudbees-ci-workshop-github-app"
+              repoOwner: "REPLACE_GITHUB_ORG"
+              repository: "pipeline-library"
+  headerLabel:
+    text: "REPLACE_GITHUB_APP"
+groovy:
+  - url: https://raw.githubusercontent.com/REPLACE_GITHUB_ORG/cloudbees-ci-config-bundle/main/create-pipeline-template-job.groovy
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - string:
+          description: "Webhook secret for CloudBees Feature Flags Workshop GitHub App"
+          id: "cloudbees-ci-workshop-github-webhook-secret"
+          scope: SYSTEM
+          secret: "${gitHubWebhookSecret}"
+      - gitHubApp:
+          apiUri: "https://api.github.com"
+          appID: "79627"
+          description: "CloudBees Feature Flags Workshop GitHub App credential"
+          id: "cloudbees-ci-workshop-github-app"
+          owner: "REPLACE_GITHUB_ORG"
+          privateKey: "${featureFlagWorkshopGitHubAppPrivateKey}"
