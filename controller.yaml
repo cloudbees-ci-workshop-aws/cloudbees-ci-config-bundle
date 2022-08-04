@@ -34,7 +34,7 @@ items:
         disk: 10
         storageClassName: gp2
         domain: REPLACE_FOLDER_NAME-REPLACE_CONTROLLER_NAME
-        namespace: controllers
+        namespace: cloudbees-sda
         yaml: |
           kind: "StatefulSet"
           spec:
